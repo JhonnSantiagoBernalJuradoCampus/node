@@ -11,14 +11,17 @@ let myServer = createServer((req,res)=>{
         })
         peticion.on("end", ()=>{
             let obj = JSON.parse(data);
-            let ids = []
-            let title = []
+            let info = [];
+            let datos = {};
             obj.forEach((val,id) => {
-                ids[id] = val.id
-                title[id] = val.title
+                datos = {
+                    "ID": val.id,
+                    "Title": val.title,
+                    "Body": val.body}
+                info.push(datos)
             });
             
-            res.end(JSON.stringify(title));
+            res.end(JSON.stringify(info));
         });
     })
 })
